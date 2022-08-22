@@ -16,11 +16,10 @@ class RoleController extends Controller
 {
 //     function __construct()
 // {
-
+// $this->middleware('permission:roles-multi-delete|roles-create|roles-multi-delete|roles-edit|roles-index|roles-destroy', ['only' => ['index','store','MultiDelete']]);
 // $this->middleware('permission:roles-create', ['only' => ['create','store']]);
 // $this->middleware('permission:roles-edit', ['only' => ['edit','update']]);
 // $this->middleware('permission:roles-destroy', ['only' => ['destroy']]);
-// $this->middleware('permission:roles-create|roles-edit|roles-index|roles-destroy', ['only' => ['index','store']]);
 
 // }
     public function index(RoleDataTable $dataTable){

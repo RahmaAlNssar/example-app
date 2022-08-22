@@ -16,6 +16,15 @@ use App\Http\Services\UserService;
 
 class UserController extends Controller
 {
+    // function __construct()
+    // {
+    //  $this->middleware('permission:MultiDelete|users-create|users-multi-delete|users-update-status|users-destroy|users-index|users-edit', ['only' => ['index','store','MultiDelete','updateStatus']]);
+    // $this->middleware('permission:users-create', ['only' => ['create','store']]);
+    // $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
+    // $this->middleware('permission:users-destroy', ['only' => ['destroy']]);
+
+
+    // }
     /**
      * Display a listing of the resource.
      *
