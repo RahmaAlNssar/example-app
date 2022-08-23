@@ -67,7 +67,7 @@ class UserDataTable extends DataTable
                     ->orderBy(1)
                     ->setTableAttribute('class', 'example table-responsiv text-nowrap')
                     ->buttons(
-                        Button::make('create'),
+                        Button::make('create')->addClass((canUser("users-create") ?? "" )),
                         Button::make('excel'),
                         Button::make('print'),
                         Button::make('reset'),

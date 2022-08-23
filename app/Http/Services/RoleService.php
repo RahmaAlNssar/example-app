@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Permission;
 class RoleService {
 
     public function handle($request,$id = null){
+
         try{
             DB::beginTransaction();
             $role = Role::updateOrCreate(['id'=>$id],$request);

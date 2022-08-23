@@ -16,15 +16,16 @@ use App\Http\Services\UserService;
 
 class UserController extends Controller
 {
-    // function __construct()
-    // {
-    //  $this->middleware('permission:MultiDelete|users-create|users-multi-delete|users-update-status|users-destroy|users-index|users-edit', ['only' => ['index','store','MultiDelete','updateStatus']]);
-    // $this->middleware('permission:users-create', ['only' => ['create','store']]);
-    // $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
-    // $this->middleware('permission:users-destroy', ['only' => ['destroy']]);
+    function __construct()
+    {
+     $this->middleware('permission:MultiDelete|users-create|users-multi-delete|users-update-status|users-destroy|users-index|users-edit', ['only' => ['index','store','MultiDelete','updateStatus']]);
+    $this->middleware('permission:users-create', ['only' => ['create','store']]);
+    $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
+    $this->middleware('permission:users-destroy', ['only' => ['destroy']]);
+    $this->middleware('permission:users-multi-delete', ['only' => ['MultiDelete']]);
+    $this->middleware('permission:users-update-status', ['only' => ['updateStatus']]);
 
-
-    // }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -94,6 +95,7 @@ class UserController extends Controller
             $row = User::where('id',$id)->first();
             $roles = Role::pluck('name', 'name')->all();
             $userRole = $row->roles->pluck('name', 'name')->all();
+
             return view('backend.users.form',compact('roles','row','userRole'));
 
         }catch(\Exception $e){
@@ -110,8 +112,8 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id,UserService $UserService)
     {
-        $user = $UserService->handle($request->all(),$id);
-        if(is_string($user)) return $this->throwException($user);
+        $user = $UserService->handle($request->all(), $id);
+        if (is_string($user)) return $this->throwException($user);
         return response()->json(['title'=>'نجاح','message'=>'تمت العملية بنجاح','status'=>'success']);
     }
 

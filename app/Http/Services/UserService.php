@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Services;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserService{
 
@@ -10,13 +12,12 @@ class UserService{
         try {
             DB::beginTransaction();
 
+            if ($request['password'] == null)
+            unset($request['password']);
 
-                if ($request['password'] == null)
-                    unset($request['password']);
+        $user = User::updateOrCreate(['id' => $id],$request);
 
-                $user = User::updateOrCreate(['id' => $id],$request);
-
-                $user->syncRoles($request['roles'] ?? []);
+        $user->syncRoles($request['roles'] ?? []);
             DB::commit();
             return $user;
         } catch (\Exception $e) {

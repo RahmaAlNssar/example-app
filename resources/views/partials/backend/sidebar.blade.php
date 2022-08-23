@@ -33,7 +33,7 @@
                     </a>
 
                 </li>
-                {{-- @can('users-index') --}}
+                @can('users-index')
                 <li class="nav-item ">
                     <a href="{{ route('backend.users.index') }}" class="nav-link {{ request()->segment(2) === 'users' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
@@ -43,8 +43,8 @@
                         </p>
                     </a>
                 </li>
-                {{-- @endcan --}}
-                {{-- @can('roles-index') --}}
+                @endcan
+                @can('roles-index')
                 <li class="nav-item">
                     <a href="{{ route('backend.roles.index') }}" class="nav-link {{ request()->segment(2) === 'roles' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-lock"></i>
@@ -54,7 +54,7 @@
                         </p>
                     </a>
                 </li>
-                {{-- @endcan --}}
+                @endcan
                 {{--
 
                 <li class="nav-item">

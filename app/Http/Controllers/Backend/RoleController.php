@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\DB;
 use Exception;
+
+use Illuminate\Http\Request;
 use App\DataTables\RoleDataTable;
 use App\Http\Requests\RoleRequest;
 use App\Http\Services\RoleService;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-//     function __construct()
-// {
-// $this->middleware('permission:roles-multi-delete|roles-create|roles-multi-delete|roles-edit|roles-index|roles-destroy', ['only' => ['index','store','MultiDelete']]);
-// $this->middleware('permission:roles-create', ['only' => ['create','store']]);
-// $this->middleware('permission:roles-edit', ['only' => ['edit','update']]);
-// $this->middleware('permission:roles-destroy', ['only' => ['destroy']]);
-
-// }
+    function __construct()
+{
+$this->middleware('permission:roles-create|roles-edit|roles-index|roles-destroy', ['only' => ['index','store']]);
+$this->middleware('permission:roles-create', ['only' => ['create','store']]);
+$this->middleware('permission:roles-edit', ['only' => ['edit','update']]);
+$this->middleware('permission:roles-destroy', ['only' => ['destroy']]);
+$this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
+}
     public function index(RoleDataTable $dataTable){
         try {
              return $dataTable->render('backend.includes.table');
@@ -40,6 +41,7 @@ class RoleController extends Controller
     }
     public function store(RoleRequest $request,RoleService $RoleService)
     {
+
         $role = $RoleService->handle($request->all());
         if(is_string($role)) return throwException($role);
         return response()->json(['title'=>'نجاح','message'=>'تمت العملية بنجاح','status'=>'success']);

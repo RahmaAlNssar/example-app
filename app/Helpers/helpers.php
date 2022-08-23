@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\DB;
 
  }
 
-
-
  function getModel(){
     return request()->segment(2);
+}
+
+ function canUser($permission){
+    return in_array($permission,auth()->user()->getAllPermissions()->pluck('name')->toArray()) ? true : false;
+
 }

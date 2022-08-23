@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class User extends Authenticatable
 {
@@ -48,8 +50,14 @@ class User extends Authenticatable
 
 
     public function status(){
-        return $this->status == 1
-            ? '<a href="'.route('backend.users.update_status',$this->id).'"class="btn btn-outline-success btn-sm toggle-class"> <span class="badge bg-success"><i class="fa fa-power-off"></i></span></a>'
-            : '<a href="'.route('backend.users.update_status',$this->id).'"class="btn btn-outline-danger btn-sm toggle-class">  <span class="badge bg-danger"><i class="fa fa-power-off"></i></span></a>';
+       if (canUser("users-update-status") == true ){
+        return  $this->status == 1
+        ? '<a href="'.route('backend.users.update_status',$this->id).'"class="btn btn-outline-success btn-sm toggle-class"> <span class="badge bg-success"><i class="fa fa-power-off"></i></span></a>'
+        : '<a href="'.route('backend.users.update_status',$this->id).'"class="btn btn-outline-danger btn-sm toggle-class">  <span class="badge bg-danger"><i class="fa fa-power-off"></i></span></a>';
+
+       }
+     else{
+        return "";
+     }
     }
 }

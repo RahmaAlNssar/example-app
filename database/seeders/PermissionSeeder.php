@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -15,16 +16,16 @@ class PermissionSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-          Permission::create(['name'=>'users-create']);
-          Permission::create(['name'=>'users-index']);
-          Permission::create(['name'=>'users-edit']);
-          Permission::create(['name'=>'users-destroy']);
-          Permission::create(['name'=>'users-update-status']);
-          Permission::create(['name'=>'users-multi-delete']);
-          Permission::create(['name'=>'roles-create']);
-          Permission::create(['name'=>'roles-index']);
-          Permission::create(['name'=>'roles-edit']);
-          Permission::create(['name'=>'roles-destroy']);
-          Permission::create(['name'=>'roles-multi-delete']);
+          Permission::create(['name'=>'users-create','name_ar'=>'إضافة مستخدم']);
+          Permission::create(['name'=>'users-index','name_ar'=>'قائمة المستخدمين']);
+          Permission::create(['name'=>'users-edit','name_ar'=>'تعديل مستخدم']);
+          Permission::create(['name'=>'users-destroy','name_ar'=>'حذف مستخدم']);
+          Permission::create(['name'=>'users-update-status','name_ar'=>'تعديل حالة المستخدم']);
+          Permission::create(['name'=>'users-multi-delete','name_ar'=>'حذف متعدد للمستخدمين']);
+          Permission::create(['name'=>'roles-create','name_ar'=>'إضافة صلاحية']);
+          Permission::create(['name'=>'roles-index','name_ar'=>'قائمة الصلاحيات']);
+          Permission::create(['name'=>'roles-edit','name_ar'=>'تعديل صلاحية']);
+          Permission::create(['name'=>'roles-destroy','name_ar'=>'حذف صلاحية']);
+          Permission::create(['name'=>'roles-multi-delete','name_ar'=>'حذف متعدد للصلاحيات']);
     }
 }

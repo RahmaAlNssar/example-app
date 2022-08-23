@@ -8,9 +8,11 @@
         <div class="container-fluid">
             <br>
             <div class="row container">
+                @can('roles-index')
                 <a href="{{ route('backend.roles.index') }}" class="btn btn-info">
                     رجوع
                 </a>
+                @endcan
             </div>
             <br>
             <div class="content-detached">
