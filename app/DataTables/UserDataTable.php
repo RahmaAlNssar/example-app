@@ -49,7 +49,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->where('is_admin',0)->newQuery();
+        return $model->where('is_admin',0)->orderBy('id','desc')->newQuery();
     }
 
     /**

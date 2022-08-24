@@ -11,7 +11,7 @@
         <a href="#" class="nav-link">Contact</a>
       </li> --}}
     </ul>
-    <ul class="navbar-nav mr-auto-navbav">
+    <ul class="navbar-nav mr-auto-navbav col-lg-1">
     <li class="nav-item">
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="hidden">

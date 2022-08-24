@@ -26,8 +26,9 @@ class UserRequest extends FormRequest
         return [
             'name'=>'string|required',
             'email'=>'string|required|unique:users,email,'.request()->route('user'),
-            'password'=>'required_without:id|min:3',
-            'roles'=>'required'
+            'password'=>'nullable|min:3',
+            'roles'=>'required',
+          
         ];
     }
 }

@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Arr;
 use App\Http\Services\UserService;
+use App\Traits\uploadImage;
 
 class UserController extends Controller
 {
+    use uploadImage;
+
     function __construct()
     {
      $this->middleware('permission:MultiDelete|users-create|users-multi-delete|users-update-status|users-destroy|users-index|users-edit', ['only' => ['index','store','MultiDelete','updateStatus']]);

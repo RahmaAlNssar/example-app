@@ -161,3 +161,4 @@ $(document).on("click", ".multi-delete", function (e) {
         }
     });
 });
+

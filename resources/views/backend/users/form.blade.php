@@ -15,9 +15,9 @@
 
     <div class="container-fluid">
         <br>
-        <div class="row container">
+        <div class="row col-lg-2 container">
             @can('users-index')
-            <a href="{{ route('backend.users.index') }}" class="btn btn-info">
+            <a href="{{ route('backend.users.index') }}" class="btn btn-outline-info">
               رجوع
             </a>
             @endcan
@@ -32,7 +32,7 @@
 
 
                         @if(isset($row))
-                        <form action="{{route('backend.users.update',$row->id)}}" method="post" class="submit">
+                        <form action="{{route('backend.users.update',$row->id)}}" method="post" class="submit" enctype="multipart/form-data">
                             @csrf
                         @method('put')
                         @else
@@ -74,9 +74,11 @@
                                 </div>
                                 <span class="error text-danger d-none"></span>
                             </div>
+                         
+                                                           
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                                <button type="submit" class="btn btn-primary submit">حفظ</button>
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">اغلاق</button>
+                                <button type="submit" class="btn btn-outline-primary submit">حفظ</button>
                             </div>
                         </form>
 
@@ -90,3 +92,5 @@
 
 </section>
 @endsection
+
+

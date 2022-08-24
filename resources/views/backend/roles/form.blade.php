@@ -7,9 +7,9 @@
 
         <div class="container-fluid">
             <br>
-            <div class="row container">
+            <div class="row col-lg-2  container">
                 @can('roles-index')
-                <a href="{{ route('backend.roles.index') }}" class="btn btn-info">
+                <a href="{{ route('backend.roles.index') }}" class="btn btn-outline-info">
                     رجوع
                 </a>
                 @endcan
