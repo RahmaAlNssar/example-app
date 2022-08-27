@@ -21,7 +21,7 @@ class UserController extends Controller
 
     function __construct()
     {
-     $this->middleware('permission:MultiDelete|users-create|users-multi-delete|users-update-status|users-destroy|users-index|users-edit', ['only' => ['index','store','MultiDelete','updateStatus']]);
+     $this->middleware('permission:users-create|users-multi-delete|users-destroy|users-index|users-edit', ['only' => ['index','store']]);
     $this->middleware('permission:users-create', ['only' => ['create','store']]);
     $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
     $this->middleware('permission:users-destroy', ['only' => ['destroy']]);
@@ -29,6 +29,8 @@ class UserController extends Controller
     $this->middleware('permission:users-update-status', ['only' => ['updateStatus']]);
 
     }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -71,7 +73,7 @@ class UserController extends Controller
     {
         $user = $UserService->handle($request->all());
         if (is_string($user)) return $this->throwException($user);
-         return response()->json(['title'=>'نجاح','message'=>'تمت العملية بنجاح','status'=>'success']);
+        return response()->json(['title'=>__('messages.success'),'message'=>__('messages.store'),'status'=>'success']);
 
     }
 
@@ -95,7 +97,7 @@ class UserController extends Controller
     public function edit($id)
     {
         try{
-            $row = User::where('id',$id)->first();
+            $row = User::query()->with('roles')->where('id',$id)->first();
             $roles = Role::pluck('name', 'name')->all();
             $userRole = $row->roles->pluck('name', 'name')->all();
 
@@ -117,7 +119,7 @@ class UserController extends Controller
     {
         $user = $UserService->handle($request->all(), $id);
         if (is_string($user)) return $this->throwException($user);
-        return response()->json(['title'=>'نجاح','message'=>'تمت العملية بنجاح','status'=>'success']);
+        return response()->json(['title'=>__('messages.success'),'message'=>__('messages.update'),'status'=>'success']);
     }
 
     /**
@@ -134,7 +136,7 @@ class UserController extends Controller
 
           $user->delete();
 
-            return response()->json(['title'=>'نجاح','message'=>' تم الحذف بنجاح','status'=>'success']);
+          return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
 
         }catch(\Exception $e){
             return response()->json($e->getMessage(), 500);
@@ -145,7 +147,7 @@ class UserController extends Controller
         try{
             $user = User::where('id',$id)->first();
             $user->update(['status'=>!$user->status]);
-              return response()->json(['title'=>'نجاح','message'=>'تم التحديث ','status'=>'success']);
+            return response()->json(['title'=>__('messages.success'),'message'=>__('messages.update'),'status'=>'success']);
           }catch(\Exception $e){
               return response()->json($e->getMessage(), 500);
           }
@@ -160,7 +162,7 @@ class UserController extends Controller
            foreach ($rows as $row)
                $row->delete();
            DB::commit();
-              return response()->json(['title'=>'نجاح','message'=>'تم الحذف ','status'=>'success']);
+           return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
 
             }catch(\Exception $e){
               return response()->json($e->getMessage(), 500);

@@ -15,7 +15,7 @@
 
     <div class="container-fluid">
         <br>
-        <div class="row col-lg-2 container">
+        <div class="row col-lg-2 col-md-2 col-sm-2 container">
             @can('users-index')
             <a href="{{ route('backend.users.index') }}" class="btn btn-outline-info">
               رجوع
@@ -74,8 +74,8 @@
                                 </div>
                                 <span class="error text-danger d-none"></span>
                             </div>
-                         
-                                                           
+
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">اغلاق</button>
                                 <button type="submit" class="btn btn-outline-primary submit">حفظ</button>

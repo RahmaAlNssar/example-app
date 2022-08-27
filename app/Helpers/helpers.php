@@ -20,6 +20,6 @@ use Illuminate\Support\Facades\DB;
 }
 
  function canUser($permission){
-    return in_array($permission,auth()->user()->getAllPermissions()->pluck('name')->toArray()) ? true : false;
-
+    $permissions = auth()->user()->getAllPermissions()->pluck('name')->toArray();
+return in_array($permission,$permissions) ? true : false;
 }

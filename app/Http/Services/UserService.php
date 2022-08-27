@@ -13,7 +13,7 @@ use uploadImage;
     {
         try {
             DB::beginTransaction();
-           
+
             if (!empty($request['password'])) {
                 $request['password'] = Hash::make($request['password']);
             }else{
@@ -24,6 +24,7 @@ use uploadImage;
             DB::commit();
             return $user;
         } catch (\Exception $e) {
+            DB::rollBack();
             return $e->getMessage();
         }
     }

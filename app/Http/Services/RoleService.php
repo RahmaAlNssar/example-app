@@ -15,6 +15,7 @@ class RoleService {
             DB::commit();
             return $role;
         }catch(\Exception $e){
+            DB::rollBack();
             return $e->getMessage();
         }
     }

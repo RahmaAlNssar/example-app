@@ -65,7 +65,7 @@ class UserDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    ->setTableAttribute('class', 'example table-responsiv text-nowrap')
+                    ->setTableAttribute('class', 'example table  table-responsiv text-nowrap')
                     ->buttons(
                         Button::make('create')->addClass((canUser("users-create") ?? "" )),
                         Button::make('excel'),

@@ -44,7 +44,7 @@ $this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
 
         $role = $RoleService->handle($request->all());
         if(is_string($role)) return throwException($role);
-        return response()->json(['title'=>'نجاح','message'=>'تمت العملية بنجاح','status'=>'success']);
+        return response()->json(['title'=>__('messages.success'),'message'=>__('messages.store'),'status'=>'success']);
     }
     public function show($id)
     {
@@ -74,13 +74,13 @@ $this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
     {
         $role = $RoleService->handle($request->all(),$id);
         if(is_string($role)) return throwException($role);
-        return response()->json(['title'=>'نجاح','message'=>'تمت العملية بنجاح','status'=>'success']);
+        return response()->json(['title'=>__('messages.success'),'message'=>__('messages.update'),'status'=>'success']);
     }
     public function destroy($id)
     {
         try{
         DB::table("roles")->where('id',$id)->delete();
-        return response()->json(['title'=>'نجاح','message'=>' تم الحذف بنجاح','status'=>'success']);
+        return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
         } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
@@ -93,9 +93,10 @@ $this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
            foreach ($rows as $row)
                $row->delete();
            DB::commit();
-              return response()->json(['title'=>'نجاح','message'=>'تم الحذف ','status'=>'success']);
+              return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
 
             }catch(\Exception $e){
+                DB::rollBack();
               return response()->json($e->getMessage(), 500);
           }
 

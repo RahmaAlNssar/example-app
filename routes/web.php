@@ -28,5 +28,9 @@ Route::group(['prefix'=>'dashboard','as'=>'backend.'],function(){
     //roles
     Route::resource('roles', 'App\Http\Controllers\Backend\RoleController');
     Route::delete('roles/delete/multi_delete',[App\Http\Controllers\Backend\RoleController::class,'MultiDelete'])->name('roles.mult.delete');
+
+
+
+
 });
 

@@ -1,3 +1,5 @@
+// const { inProduction } = require("laravel-mix");
+
 function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -123,7 +125,9 @@ $(document).on("click", ".multi-delete", function (e) {
     var id = [];
     var token = $("meta[name='csrf-token']").attr("content");
     var href = $(this).attr("href");
-
+    $(".checkbox:checked").each(function () {
+        id.push($(this).val());
+    });
     Swal.fire({
         title: "هل تريد الاستمرار؟",
         icon: "question",
@@ -133,10 +137,8 @@ $(document).on("click", ".multi-delete", function (e) {
         showCancelButton: true,
         showCloseButton: true,
     }).then((result) => {
-        $(".checkbox:checked").each(function () {
-            id.push($(this).val());
-        });
-        if (id.length > 0) {
+
+        if (id.length > 0 && result.value) {
             $.ajax({
                 type: "delete",
                 url: href,
@@ -152,13 +154,14 @@ $(document).on("click", ".multi-delete", function (e) {
                         $(".example").DataTable().ajax.reload();
                     });
                 },
-                error: function (err) {
-                    swal.fire("Oops...", "يوجد خطأ ما!", "error");
+                error: function (resonse) {
+                    swal.fire("Oops...", resonse.message, "error");
                 },
             });
         } else {
-            swal.fire("Oops...", "لم يتم اختيار اي أسطر للحذف!", "error");
+            swal.fire("Oops...", "يوجد خطأ ما!", "error");
         }
     });
 });
+
 
