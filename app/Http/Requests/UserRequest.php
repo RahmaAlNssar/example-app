@@ -23,12 +23,13 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name'=>'string|required',
             'email'=>'string|required|unique:users,email,'.request()->route('user'),
             'password'=>'nullable|min:3',
             'roles'=>'required',
-          
+
         ];
     }
 }

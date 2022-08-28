@@ -79,9 +79,11 @@ $this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
     public function destroy($id)
     {
         try{
-        DB::table("roles")->where('id',$id)->delete();
+        $row = DB::table("roles")->where('id',$id)->delete();
+
         return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
-        } catch (Exception $e) {
+
+    } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -92,6 +94,7 @@ $this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
            DB::beginTransaction();
            foreach ($rows as $row)
                $row->delete();
+
            DB::commit();
               return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
 

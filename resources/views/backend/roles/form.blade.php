@@ -31,11 +31,12 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">اسم الوظيفة:</label>
                                 <input type="text" class="form-control" name="name"
-                                    value="{{ $row->name ?? old('name') }}" id="sname">
-                                <span class="error red" id="name-error" style="color:red;"></span>
+                                    value="{{ $row->name ?? old('name') }}" id="name">
+                                    <span class="error text-danger d-none"></span>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">الصلاحيات:</label>
+
                                 <div class="row">
                                     @foreach ($permission as $value)
                                         <div class="col-lg-2">
@@ -47,9 +48,10 @@
                                                 <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
                                                     {{ $value->name_ar }}</label>
                                             @endif
+
                                         </div>
                                     @endforeach
-
+                                    <span class="error text-danger d-none"></span>
                                 </div>
 
                             </div>

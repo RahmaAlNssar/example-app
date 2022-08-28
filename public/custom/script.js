@@ -17,11 +17,11 @@ $(document).on("click", "#warning", function (e) {
     var token = $("meta[name='csrf-token']").attr("content");
 
     Swal.fire({
-        title: "هل تريد الاستمرار؟",
+        title: "Do You Want To Continue ?",
         icon: "question",
         iconHtml: "؟",
-        confirmButtonText: "نعم",
-        cancelButtonText: "لا",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         showCancelButton: true,
         showCloseButton: true,
     }).then((result) => {
@@ -31,6 +31,7 @@ $(document).on("click", "#warning", function (e) {
                 type: "DELETE",
                 data: { id: id, _token: token },
                 dataType: "json",
+
             })
                 .done(function (response) {
                     swal.fire(
@@ -42,9 +43,16 @@ $(document).on("click", "#warning", function (e) {
                         $(".example").DataTable().ajax.reload();
                     });
                 })
-                .fail(function () {
-                    swal.fire("Oops...", "يوجد خطأ ما!", "error");
+                .fail(function() {
+
+                    swal.fire("Oops...","some thing wrong","error");
+
                 });
+                // .error(function( data ) {
+                //     // uh oh, something went wrong a 4xx response was returned (could be 400, 422 etc)
+                //     // backend - return response()->json(['message' => 'Email is not in the proper format!'], 422);
+                //     swal("Oops...", data.responseJSON.message, "error");
+                // });
         }
     });
 });
@@ -87,11 +95,11 @@ $(document).on("click", ".toggle-class", function (e) {
     var id = $(this).data("id");
     var href = $(this).attr("href");
     Swal.fire({
-        title: "هل تريد الاستمرار؟",
+        title:"Do You Want To Continue?",
         icon: "question",
         iconHtml: "؟",
-        confirmButtonText: "نعم",
-        cancelButtonText: "لا",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         showCancelButton: true,
         showCloseButton: true,
     }).then((result) => {
@@ -114,7 +122,7 @@ $(document).on("click", ".toggle-class", function (e) {
                     // $(".example").location.reload();
                 })
                 .fail(function () {
-                    swal.fire("Oops...", "يوجد خطأ ما!", "error");
+                    swal.fire("Oops...","Some Thing Wrong", "error");
                 });
         }
     });
@@ -129,11 +137,11 @@ $(document).on("click", ".multi-delete", function (e) {
         id.push($(this).val());
     });
     Swal.fire({
-        title: "هل تريد الاستمرار؟",
+        title: "Do You Want To Continue ?",
         icon: "question",
         iconHtml: "؟",
-        confirmButtonText: "نعم",
-        cancelButtonText: "لا",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         showCancelButton: true,
         showCloseButton: true,
     }).then((result) => {
@@ -154,12 +162,14 @@ $(document).on("click", ".multi-delete", function (e) {
                         $(".example").DataTable().ajax.reload();
                     });
                 },
-                error: function (resonse) {
-                    swal.fire("Oops...", resonse.message, "error");
+                error: function (data) {
+
+                   swal.fire("Oops...", data.responseJSON.message, "error");
                 },
             });
         } else {
-            swal.fire("Oops...", "يوجد خطأ ما!", "error");
+
+            swal.fire("Oops...","Some Thing Wrong", "error");
         }
     });
 });

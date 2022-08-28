@@ -1,12 +1,8 @@
 @extends('layouts.admin')
 @section('title')
-{{__('sidebar.users')}}
+المدراء
 @endsection
-@section('css')
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-@endsection
+
 @section('content')
 
 

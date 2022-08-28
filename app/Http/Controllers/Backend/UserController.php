@@ -134,7 +134,7 @@ class UserController extends Controller
         try{
           $user = User::where('id',$id)->first();
 
-          $user->delete();
+         $user->delete();
 
           return response()->json(['title'=>__('messages.success'),'message'=>__('messages.delete'),'status'=>'success']);
 
