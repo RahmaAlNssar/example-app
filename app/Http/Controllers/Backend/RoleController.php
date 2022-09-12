@@ -15,14 +15,7 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-    function __construct()
-{
-$this->middleware('permission:roles-create|roles-edit|roles-index|roles-destroy', ['only' => ['index','store']]);
-$this->middleware('permission:roles-create', ['only' => ['create','store']]);
-$this->middleware('permission:roles-edit', ['only' => ['edit','update']]);
-$this->middleware('permission:roles-destroy', ['only' => ['destroy']]);
-$this->middleware('permission:roles-multi-delete', ['only' => ['MultiDelete']]);
-}
+
     public function index(RoleDataTable $dataTable){
         try {
              return $dataTable->render('backend.includes.table');

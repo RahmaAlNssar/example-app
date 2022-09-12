@@ -7,9 +7,9 @@
             <br>
             <div class="row col-lg-2  container">
 
-                <a href="{{ route('backend.'.getModel().'.index') }}" class="btn btn-outline-info">
+                {{-- <a href="{{ route('backend.'.getModel().'.index') }}" class="btn btn-outline-info">
                     رجوع
-                </a>
+                </a> --}}
 
             </div>
             <br>
@@ -18,11 +18,11 @@
                     <div class="card">
                         <div class="card-body">
                             @if (isset($row))
-                                <form action="{{ route('backend.'.getModel().'.update', $row->id) }}" class="submit" method="post"
+                                <form action="" class="submit" method="post"
                                    enctype="multipart/form-data">
                                     @method('put')
                                 @else
-                                    <form action="{{ route('backend.'.getModel().'.store') }}" method="post" class="submit"
+                                    <form action="" method="post" class="submit"
                                         enctype="multipart/form-data">
                                         <div class="body" id="content">
 
@@ -45,3 +45,4 @@
 
 </section>
 @endsection
+

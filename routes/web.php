@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,14 @@ Route::group(['prefix'=>'dashboard','as'=>'backend.'],function(){
    Route::resource('roles', 'App\Http\Controllers\Backend\RoleController');
     Route::delete('roles/delete/multi_delete',[App\Http\Controllers\Backend\RoleController::class,'MultiDelete'])->name('roles.mult.delete');
 
+    // users excel
+    Route::get('users/export', [App\Http\Controllers\Backend\ImportExportController::class, 'export'])->name('users.export');
+    Route::put('/imports',[App\Http\Controllers\Backend\ImportExportController::class,'import'])->name('users.imports');
 
+
+    // Route::get('test/create',[App\Http\Controllers\testcontroller::class,'create'])->name('test.create');
+    // Route::get('test',[App\Http\Controllers\testcontroller::class,'index'])->name('test.index');
 
 });
+
 

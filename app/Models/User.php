@@ -65,4 +65,26 @@ class User extends Authenticatable
         return "";
      }
     }
+
+    public function scopeFilter(Builder $builder,$filters){
+        $options =array_merge( [
+            'name'=>null,
+            'role_id'=>null
+        ],$filters);
+
+        $builder->when($options['name'],function($builder,$value){
+            $builder->where('name',$value);
+        });
+
+        $builder->when($options['role_id'],function($builder,$value){
+            $builder->whereExists(function($query) use($value){
+                $query->select(1)
+                ->from('model_has_roles')
+                ->whereRaw('role_id','roles.id')
+                ->where('model_id',$value);
+            });
+        });
+    }
+
+
 }

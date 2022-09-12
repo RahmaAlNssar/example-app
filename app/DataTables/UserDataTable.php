@@ -12,6 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 class UserDataTable extends DataTable
 {
     protected $fastExcel = true;
+    protected $fastExcelCallback = true;
     /**
      * Build DataTable class.
      *
@@ -38,6 +39,10 @@ class UserDataTable extends DataTable
             ->editColumn('action', function($row){
                 return view('backend.includes.action',['row'=>$row->id])->render();
             })
+
+            // ->editColumn('ExportImport', function($row){
+            //     return view('backend.includes.importExport',['row'=>$row->id])->render();
+            // })
             ->rawColumns(['created_at','action','id','status']);
     }
 
@@ -65,15 +70,17 @@ class UserDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    ->setTableAttribute('class', 'example table  table-responsiv text-nowrap')
+                    ->setTableAttribute('id','example')
+                    ->setTableAttribute('class', 'example table table-striped  table-primary table-hover table-responsive-md data-table  table-fixed  display responsive nowrap')
                     ->buttons(
                         Button::make('create')->addClass((canUser("users-create") ?? "" )),
-                        Button::make('excel'),
-                        Button::make('print'),
-                        Button::make('reset'),
+                       Button::make('excelHtml5'),
+                        Button::make('pdfHtml5'),
+                        //Button::make('reset'),
                         Button::make('reload')
                     );
     }
+
 
     /**
      * Get columns.
@@ -94,7 +101,10 @@ class UserDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
-                  ->addClass('text-center')->addClass('row')->title('العملية'),
+                  ->addClass('text-center')->title('العملية'),
+            //Column::computed('ExportImport')->title('استيراد وتصدير اكسل')
+
+
         ];
     }
 

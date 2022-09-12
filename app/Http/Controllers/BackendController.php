@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class BackendController extends Controller
 {
@@ -24,7 +25,7 @@ class BackendController extends Controller
     public function create(){
         try{
 
-            return view('backend.includes.form');
+          return view('backend.includes.form');
         }catch(\Exception $e){
             return response()->json($e->getMessages(),500);
         }

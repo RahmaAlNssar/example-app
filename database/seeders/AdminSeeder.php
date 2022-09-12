@@ -31,5 +31,9 @@ class AdminSeeder extends Seeder
         $role->syncPermissions($permissions);
 
         $user->assignRole([$role->id]);
+    // User::factory()
+    // ->count(1000)
+
+    // ->create();
     }
 }

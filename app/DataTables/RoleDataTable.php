@@ -63,12 +63,10 @@ class RoleDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
-                    ->setTableAttribute('class', 'example table-responsiv text-nowrap')
+                    ->setTableAttribute('class', 'example table table-striped  table-primary table-hover table-responsive-md data-table  table-fixed  display responsive nowrap')
                     ->buttons(
                         Button::make('create')->addClass((canUser("roles-create") ?? "" )),
-                        Button::make('excel'),
-                        Button::make('print'),
-                        Button::make('reset'),
+
                         Button::make('reload')
                     );
     }

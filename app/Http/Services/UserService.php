@@ -22,7 +22,7 @@ use uploadImage;
         $user = User::updateOrCreate(['id' => $id],$request);
         $user->syncRoles($request['roles'] ?? []);
             DB::commit();
-            return $user;
+           return $user;
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();

@@ -1,5 +1,7 @@
 // const { inProduction } = require("laravel-mix");
 
+const { then } = require("laravel-mix");
+
 function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -174,4 +176,69 @@ $(document).on("click", ".multi-delete", function (e) {
     });
 });
 
+
+
+
+$(document).on("submit", "#form", function (e) {
+    //Some code 1
+
+    e.preventDefault();
+
+    var action = $(this).attr("action");
+    var token = $("meta[name='csrf-token']").attr("content");
+    var data = $("input[name='file']").val();
+
+    var type = $(this).attr("method");
+    let form = $(this);
+
+            $.ajax({
+                url: action,
+                type: type,
+                data:{data,_token:token},
+                dataType: "json",
+                success:function (results) {
+                    if (results.success === true) {
+                        swal.fire(results.title,results.message,results.status
+                            ).then((result) => {
+                                // Reload the Page
+                                $(".example").DataTable().ajax.reload();
+                            });
+                    } else {
+                        swal.fire("Error!", "you select wrong file", "error");
+                    }
+
+                },
+                error: function (jqXhr,textStatus, errorMessage ) {
+                    if (jqXhr.readyState == 0) {
+                         return false;
+                     } else if (jqXhr.status == 422) {
+                         $.each(jqXhr.responseJSON.errors, function (key, val) {
+                             key = key.split('.');
+                             if (key.length > 1) {
+                                 form.find(`input[name*='${key[0]}[${key[1]}][${key[2]}]']`).parent().next('span.error').text(val).fadeIn(300);
+                             } else {
+                                 form.find(`#${key}-error`).text(val).fadeIn(300);
+                             }
+                         });
+                     } else {
+                         if (jqXhr.responseJSON.line) {
+                             toast('File: ' + jqXhr.responseJSON.file + ' (Line: ' + jqXhr.responseJSON.line + ')', jqXhr.responseJSON.message)
+                         } else {
+                             toast(jqXhr.responseJSON, title = null);
+                         }
+                     }
+                 },
+            })
+
+
+
+});
+// $(document).on("click", "#upload_link", function (e) {
+
+//     e.preventDefault();
+
+//     var input= $('input[type=file]').val();
+//     alert(input);
+
+// });
 
