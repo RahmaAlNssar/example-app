@@ -18,7 +18,7 @@
 
 <div class="btn-group" role="group" aria-label="Basic example">
     {{-- <a href="{{ route('backend.'.getModel().'.export') }}" type="button" class="btn btn-outline-secondary export">Export </a> --}}
-    <form action="{{ route('backend.'.getModel().'.imports') }}" id="form" method="post" enctype="multipart/form-data">
+    <form action="{{ route('backend.users.imports') }}" id="form" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <label for="">import xsl</label>
